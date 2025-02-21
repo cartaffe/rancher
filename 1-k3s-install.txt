@@ -1,0 +1,7 @@
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.31.5+k3s1 sh -s - server --cluster-init
+copy /etc/rancher/k3s/k3s.yaml to .kube/config
+check with ...
+systemctl status k3s.
+
+
+

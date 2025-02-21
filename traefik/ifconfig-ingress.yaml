@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ifconfig-ingress
+  namespace: ifconfig
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: ifconfig.inv.gov.ar
+      http:
+        paths:
+          - backend:
+              service:
+                name: ifconfig-svc
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix

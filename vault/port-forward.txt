@@ -1,0 +1,7 @@
+kubectl port-forward svc/vault 8200:8200 -n vault
+
+from browser 
+http://localhost:8200
+
+
+

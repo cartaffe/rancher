@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: nginx-vc
+  namespace: nginx
+spec:
+  gateways:
+  - nginx-gw
+  hosts:
+    - nginx.inv.gov.ar
+  http:
+  - match:
+    - uri:
+        prefix: "/"
+    route:
+    - destination:
+        host: nginx-svc.nginx.svc.cluster.local
+        port:
+          number: 4000

@@ -1,0 +1,8 @@
+rancher 172.16.0.106
+#k3s 3 nodos
+k3s     172.16.0.72
+k4s     172.16.0.98
+k5s     172.16.0.82
+#rke 2 nodos 
+rke     172.16.0.XXX
+rkf     172.16.0.XXX

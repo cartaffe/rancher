@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ifconfig
+  annotations:
+    field.cattle.io/description: to test rancher deployments
+    field.cattle.io/containerDefaultResourceLimit: >-
+      {"limitsCpu":"200m","limitsMemory":"512Mi","requestsCpu":"100m","requestsMemory":"256Mi"}
+    field.cattle.io/projectId: c-m-2wzjl2l7:p-9dzdf
+    #  key: string
+  labels:
+    field.cattle.io/projectId: p-9dzdf
+      #    istio-injection: enabled
+    #  key: string
+spec:
+#  finalizers:
+#    - string
+#__clone: true

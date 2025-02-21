@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ifconfig
+  annotations:
+    field.cattle.io/description: test deployment over rancher downstream cluster
+  labels:
+    app.kubernetes.io/name: ifconfig
+    app: ifconfig  
+  namespace: ifconfig
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ifconfig
+      app: ifconfig  
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ifconfig
+        app: ifconfig  
+      namespace: ifconfig
+      #create a kv VERSION 2 secret engine called kv
+      #vault secrets enable -version=2 -path=kv kv
+      #create a kv secret called ifconfig
+      #vault kv put kv/ifconfig KEY1=USER KEY2=PASSWORD
+      #create a policy ifconfig with the following policy
+      #vault policy write ifconfig - <<EOF
+      #path "kv/data/ifconfig*" {
+      #  capabilities = ["read"]
+      # create an kubernetes auth access
+      # vault auth enable kubernetes
+      # config the kubernetes auth for vault pod ....
+      # vault write auth/kubernetes/config token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      #create a auth role ifconfig with the following policy
+      #vault write auth/kubernetes/role/ifconfig bound_service_account_names=ifconfig bound_service_account_namespaces=ifconfig policies=ifconfig ttl=24h
+
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/agent-inject-status: "update"
+        vault.hashicorp.com/role: "ifconfig"
+        vault.hashicorp.com/agent-inject-secret-file.txt: "kv/data/ifconfig"
+        vault.hashicorp.com/agent-inject-template-file.txt: |
+          {{- with secret "kv/data/ifconfig" -}}
+          postgresql://{{ .Data.data.KEY1 }}:{{ .Data.data.KEY2 }}
+          {{- end -}}
+    spec:
+      # to let access to vault secrets
+      serviceAccountName: ifconfig
+      containers:
+        - name: ifconfig
+          imagePullPolicy: IfNotPresent
+          image: georgyo/ifconfig.io:latest
+          securityContext:
+            runAsNonRoot: false
+            readOnlyRootFilesystem: false
+            privileged: false
+            allowPrivilegeEscalation: false
+          ports:
+            - containerPort: 8080
+              protocol: TCP

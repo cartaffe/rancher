@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nginx
+  annotations:
+  labels:
+    field.cattle.io/projectId: p-9dzdf
+    istio-injection: enabled
+    #  key: string
+spec:
+#  finalizers:
+#    - string
+#__clone: true

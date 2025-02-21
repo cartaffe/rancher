@@ -1,0 +1,7 @@
+kubectl port-forward svc/ifconfig-svc 8000:8080 -n ifconfig
+
+from browser 
+http://localhost:8000
+
+
+

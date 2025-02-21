@@ -1,0 +1,9 @@
+install rancher binary .. go to browser 
+https://127.0.0.1.sslip.io/dashboard/auth (admin pass)
+select cluster you want to connect with rancher ...
+in the left bottom click on version ... download rancher binary , unzip and untar it ...
+rancher login https://127.0.0.1.sslip.io --token token-smwpb:nwrxqlr2krf9cv5lxzptm6bnr2xmddrqbg6h75srcqxpxf2d7j5swm
+rancher clusters
+rancher clusters
+rancher context current
+rancher kubectl get pods -A

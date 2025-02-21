@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rke2-ingress-nginx-controller-admission
+  namespace: kube-system
+spec:
+  selector:
+    app.kubernetes.io/name: rancher-webhook
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 9443

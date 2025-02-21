@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ifconfig-svc
+  annotations:
+    field.cattle.io/description: 'service to test '
+  labels:
+    app.kubernetes.io/name: ifconfig
+  namespace: ifconfig
+spec:
+  selector:
+    app.kubernetes.io/name: ifconfig
+  ports:
+    - name: ifconfig-svc
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+  type: LoadBalancer
