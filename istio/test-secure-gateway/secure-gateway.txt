@@ -1,0 +1,4 @@
+https://istio.io/latest/docs/tasks/traffic-management/ingress/secure-ingress/
+
+mini apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/standard-install.yaml
+mini apply -f httpbin.yaml

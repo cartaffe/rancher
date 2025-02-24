@@ -22,6 +22,7 @@ helm install istiod istio/istiod -n istio-system --wait
 kubectl create namespace istio-ingress
 helm install istio-ingress istio/gateway -n istio-ingress --wait
 
+#no es necesario
 helm install istio-egress istio/gateway --namespace istio-egress --wait
 
 https://kiali.io/docs/installation/installation-guide/install-with-helm/

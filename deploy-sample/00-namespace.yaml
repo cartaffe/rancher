@@ -11,7 +11,7 @@ metadata:
     #  key: string
   labels:
     field.cattle.io/projectId: p-9dzdf
-      #    istio-injection: enabled
+    istio-injection: enabled
     #  key: string
 spec:
 #  finalizers:

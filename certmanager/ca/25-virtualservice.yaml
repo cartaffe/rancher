@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: ifconfig2
+  namespace: ifconfig
+spec:
+  gateways:
+  - global2
+  hosts:
+    - ifconfig.inv.gov.ar
+  http:
+  - match:
+    - uri:
+        prefix: "/"
+    route:
+    - destination:
+        host: ifconfig-svc.ifconfig.svc.cluster.local
+        port:
+          number: 8080
