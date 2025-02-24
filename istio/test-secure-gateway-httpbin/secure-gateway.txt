@@ -1,0 +1,11 @@
+https://istio.io/latest/docs/tasks/traffic-management/ingress/secure-ingress/
+
+ks apply -f httpbin.yaml
+ks apply -f gateway
+ks apply -f virtualservice
+
+kubectl create -n istio-system secret tls httpbin-credential \
+  --key=example_certs1/httpbin.example.com.key \
+  --cert=example_certs1/httpbin.example.com.crt
+
+test with curl.txt

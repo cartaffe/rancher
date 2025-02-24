@@ -5,8 +5,8 @@ metadata:
   namespace: vault
 spec:
   selector:
-    istio: ingress
-    app: istio-ingress
+    app: istio-ingressgateway
+    istio: ingressgateway
   servers:
   - hosts:
     - vault.inv.gov.ar

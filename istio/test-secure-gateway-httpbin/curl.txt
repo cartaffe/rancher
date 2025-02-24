@@ -1,0 +1,2 @@
+curl -v -H 'Host: httpbin.example.com'  --cacert example_certs1/example.com.crt "https://httpbin.example.com/status/418"
+
