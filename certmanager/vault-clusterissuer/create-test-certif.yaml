@@ -1,13 +1,13 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: ifconfig-cert
-  namespace: istio-system
+  name: test-cert
+  namespace: cert-manager
 spec:
-  secretName: ifconfig-inv-gov-ar
+  secretName: test-inv-gov-ar
   issuerRef:
     kind: ClusterIssuer
     name: vault-cluster-issuer
-  commonName: ifconfig.inv.gov.ar
+  commonName: test.inv.gov.ar
   dnsNames:
-  - ifconfig.inv.gov.ar
+  - test.inv.gov.ar

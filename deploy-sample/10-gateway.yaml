@@ -13,7 +13,7 @@ spec:
       protocol: HTTPS
     tls:
       mode: SIMPLE
-      credentialName: cert-manager/ifconfig-inv-gov-ar
+      credentialName: ifconfig-inv-gov-ar
     hosts:
     - ifconfig.inv.gov.ar
   - port:

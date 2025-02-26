@@ -18,17 +18,17 @@ vault write pki/config/urls \
     issuing_certificates="http://vault.vault:8200/v1/pki/ca" \
     crl_distribution_points="http://vault.vault:8200/v1/pki/crl"
 
-vault write pki/roles/inv-doc-gov-dot-ar \
+vault write pki/roles/inv-dot-gov-dot-ar \
     key_type=any \
-    allowed_domains=nv.gov.ar \
+    allowed_domains=inv.gov.ar \
     allow_subdomains=true \
     max_ttl=5m
 
 vault policy write pki - <<EOF
 path "pki*" { capabilities = ["read", "list"] }
-path "pki/roles/inv-doc-gov-dot-ar"   { capabilities = ["create", "update"] }
-path "pki/sign/inv-doc-gov-dot-ar"    { capabilities = ["create", "update"] }
-path "pki/issue/inv-doc-gov-dot-ar"   { capabilities = ["create"] }
+path "pki/roles/inv-dot-gov-dot-ar"   { capabilities = ["create", "update"] }
+path "pki/sign/inv-dot-gov-dot-ar"    { capabilities = ["create", "update"] }
+path "pki/issue/inv-dot-gov-dot-ar"   { capabilities = ["create"] }
 EOF
 
 this was already done

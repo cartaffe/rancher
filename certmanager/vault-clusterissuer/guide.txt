@@ -1,0 +1,1 @@
+https://yuweisung.medium.com/creating-a-cluster-issuer-in-cert-manager-with-vault-6d678111297e
