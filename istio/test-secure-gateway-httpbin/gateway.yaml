@@ -15,9 +15,9 @@ spec:
       credentialName: istio-system/httpbin-credential # must be the same as secret
     hosts:
     - httpbin.example.com
-#  - port:
-#      number: 80
-#      name: http
-#      protocol: HTTP
-#    hosts:
-#    - httpbin.inv.gov.ar
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - httpbin.example.com

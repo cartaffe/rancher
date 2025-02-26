@@ -4,10 +4,10 @@ metadata:
   name: ifconfig
   namespace: ifconfig
 spec:
-  gateways:
-  - istio-system/global
   hosts:
     - ifconfig.inv.gov.ar
+  gateways:
+  - ifconfig/global
   http:
   - match:
     - uri:

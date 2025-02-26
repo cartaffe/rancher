@@ -1,29 +1,12 @@
 
-helm repo add istio https://istio-release.storage.googleapis.com/charts
-helm repo update
-helm install istio-base istio/base -n istio-system --set defaultRevision=default --create-namespace
-NAME: istio-base
-LAST DEPLOYED: Fri Feb 14 08:48:48 2025
-NAMESPACE: istio-system
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-NOTES:
-Istio base successfully installed!
-
-To learn more about the release, try:
-  $ helm status istio-base -n istio-system
-  $ helm get all istio-base -n istio-system
+de acá https://istio.io/latest/docs/setup/additional-setup/download-istio-release/
+curl -L https://istio.io/downloadIstio | sh -
 
 
-helm install istiod istio/istiod -n istio-system --wait
+install default profile
 
+istioctl install --set meshConfig.accessLogFile=/dev/stdout
 
-kubectl create namespace istio-ingress
-helm install istio-ingress istio/gateway -n istio-ingress --wait
-
-#no es necesario
-helm install istio-egress istio/gateway --namespace istio-egress --wait
 
 https://kiali.io/docs/installation/installation-guide/install-with-helm/
 

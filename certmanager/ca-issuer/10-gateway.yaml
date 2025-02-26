@@ -1,25 +1,24 @@
 apiVersion: networking.istio.io/v1
 kind: Gateway
 metadata:
-  name: global2
+  name: global
   namespace: ifconfig
 spec:
   selector:
-    istio: ingress
-    app: istio-ingress
+    istio: ingressgateway
   servers:
-  - hosts:
-    - ifconfig.inv.gov.ar
-    port:
+  - port:
       number: 443
       name: https
       protocol: HTTPS
     tls:
       mode: SIMPLE
-      credentialName: iftest-cert
-  - hosts:
+      credentialName: istio-system/root-secret
+    hosts:
     - ifconfig.inv.gov.ar
-    port:
+  - port:
       number: 80
       name: http
       protocol: HTTP
+    hosts:
+    - ifconfig.inv.gov.ar

@@ -1,0 +1,53 @@
+https://genekuo.medium.com/using-hashicorp-vault-as-certificate-manager-on-a-kubernetes-cluster-155604d39a60
+
+kubectl exec -it vault-0 -- /bin/sh
+export VAULT_TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+export VAULT_ADDR=https://vault.vault.svc.cluster.local:8200
+
+vault secrets enable pki
+vault secrets tune -max-lease-ttl=8760h pki
+
+vault write -format=json pki/root/generate/internal \
+    common_name="INV Root Certificate Authority" > /tmp/demo-root-ca.json
+cat /tmp/demo-root-ca.json
+
+vault write pki/root/generate/internal \
+    common_name=inv.gov.ar ttl=8760h
+
+vault write pki/config/urls \
+    issuing_certificates="http://vault.vault:8200/v1/pki/ca" \
+    crl_distribution_points="http://vault.vault:8200/v1/pki/crl"
+
+vault write pki/roles/inv-doc-gov-dot-ar \
+    key_type=any \
+    allowed_domains=nv.gov.ar \
+    allow_subdomains=true \
+    max_ttl=5m
+
+vault policy write pki - <<EOF
+path "pki*" { capabilities = ["read", "list"] }
+path "pki/roles/inv-doc-gov-dot-ar"   { capabilities = ["create", "update"] }
+path "pki/sign/inv-doc-gov-dot-ar"    { capabilities = ["create", "update"] }
+path "pki/issue/inv-doc-gov-dot-ar"   { capabilities = ["create"] }
+EOF
+
+this was already done
+#vault auth enable kubernetes
+#
+#vault write auth/kubernetes/config \
+#    token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
+#    kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
+#    kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+
+vault write auth/kubernetes/role/issuer \
+    bound_service_account_names=issuer \
+    bound_service_account_namespaces=cert-manager,default \
+    policies=pki \
+    ttl=20m
+
+exit
+
+kubectl create serviceaccount issuer -n cert-manager
+kubectl apply -f secret.yaml
+
+kubectl apply -f issuer.yaml

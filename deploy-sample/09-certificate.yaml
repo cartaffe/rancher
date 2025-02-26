@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ifconfig-cert
+  namespace: istio-system
+spec:
+  secretName: ifconfig-cert-secret
+  issuerRef:
+    name: vault-cissuer
+  commonName: ifconfig.inv.gov.ar
+  dnsNames:
+  - ifconfig.inv.gov.ar

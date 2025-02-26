@@ -1,13 +1,13 @@
 apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
-  name: ifconfig2
+  name: ifconfig
   namespace: ifconfig
 spec:
-  gateways:
-  - global2
   hosts:
     - ifconfig.inv.gov.ar
+  gateways:
+  - ifconfig/global
   http:
   - match:
     - uri:

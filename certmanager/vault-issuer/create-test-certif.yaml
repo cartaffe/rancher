@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: demo-cert
+  namespace: cert-manager
+spec:
+  secretName: demo-inv-gov-ar
+  issuerRef:
+    name: vault-issuer
+  commonName: demo.inv.gov.ar
+  dnsNames:
+  - demo.inv.gov.ar

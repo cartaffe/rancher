@@ -1,0 +1,1 @@
+create a self-signer root certificate (in cert-manager namespace) , then delete it. Leave only root-secret secret in ISTIOOOOOOOOOO namespace. 
