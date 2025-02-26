@@ -1,1 +1,56 @@
 https://yuweisung.medium.com/creating-a-cluster-issuer-in-cert-manager-with-vault-6d678111297e
+
+inside vault-0 pod
+
+kubectl exec -it vault-0 -- /bin/sh
+
+kubernetes config ... previously done
+#vault auth enable kubernetes
+#
+#vault write auth/kubernetes/config \
+#    token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
+#    kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
+#    kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+
+create a kubernetes role for the Clusterissuer
+vault write auth/kubernetes/role/cert-manager \
+    bound_service_account_names=vault-auth \
+    bound_service_account_namespaces=cert-manager,istio-system \
+    policies=pki \
+    ttl=1h
+
+enable PKI secrets engine
+vault secrets enable pki
+vault secrets tune -max-lease-ttl=8760h pki
+
+vault write -format=json pki/root/generate/internal \
+    common_name="INV Root Certificate Authority" ttl=8760h
+
+vault write pki/config/urls \
+    issuing_certificates="http://vault.vault:8200/v1/pki/ca" \
+    crl_distribution_points="http://vault.vault:8200/v1/pki/crl"
+
+
+vault write pki/roles/pki \
+    key_type=any \
+    allowed_domains=inv.gov.ar \
+    allow_subdomains=true \
+    max_ttl=5m
+
+vault policy write pki - <<EOF
+path "pki*" { capabilities = ["read", "list"] }
+path "pki/roles/pki"   { capabilities = ["create", "update"] }
+path "pki/sign/pki"    { capabilities = ["create", "update"] }
+path "pki/issue/pki"   { capabilities = ["create"] }
+EOF
+
+exit pod
+
+
+kubectl create serviceaccount vault-auth -n cert-manager
+kubectl apply -f secret.yaml
+kubectl apply -f clusterissuer.yaml
+
+test a certificate
+kubectl apply -f create-test-certif.yaml
+
