@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: test-cert
+  namespace: istio-system
+#  labels:
+#    k8s: "true"
+spec:
+  secretName: test-inv-gov-ar
+  renewBefore: 720h
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-cluster-issuer
+#    group: cert-manager.io
+  commonName: test.inv.gov.ar
+  dnsNames:
+  - test.inv.gov.ar

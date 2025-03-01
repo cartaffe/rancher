@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ifconfig-cert
+  namespace: istio-system
+#  labels:
+#    k8s: "true"
+spec:
+  secretName: ifconfig-inv-gov-ar-secret
+  renewBefore: 720h
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-cluster-issuer
+#    group: cert-manager.io
+  commonName: ifconfig.inv.gov.ar
+  dnsNames:
+  - ifconfig.inv.gov.ar

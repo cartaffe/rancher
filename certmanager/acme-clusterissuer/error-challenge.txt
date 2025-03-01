@@ -1,0 +1,41 @@
+Name:         ifconfig-cert-1-3914168094-2376038723
+Namespace:    istio-system
+Labels:       <none>
+Annotations:  <none>
+API Version:  acme.cert-manager.io/v1
+Kind:         Challenge
+Metadata:
+  Creation Timestamp:  2025-02-28T19:54:27Z
+  Finalizers:
+    acme.cert-manager.io/finalizer
+  Generation:  1
+  Owner References:
+    API Version:           acme.cert-manager.io/v1
+    Block Owner Deletion:  true
+    Controller:            true
+    Kind:                  Order
+    Name:                  ifconfig-cert-1-3914168094
+    UID:                   8945ba28-79cf-492b-935e-d13e06e1fc90
+  Resource Version:        5985038
+  UID:                     feed35a8-9a04-4701-bdbf-ee0878fc7d23
+Spec:
+  Authorization URL:  https://acme-staging-v02.api.letsencrypt.org/acme/authz/187182724/16236071664
+  Dns Name:           ifconfig.inv.gov.ar
+  Issuer Ref:
+    Kind:  ClusterIssuer
+    Name:  letsencrypt-cluster-issuer
+  Key:     zuWYQWWYG3PMzNStg3N38gnYmK1EnQfeU3NbVpcdlqE.AwGYBagQunPd4s50rK59ZeZge7ERc4wI4LQKjmcYZD8
+  Solver:
+    http01:
+      Ingress:
+        Class:  istio
+  Token:        zuWYQWWYG3PMzNStg3N38gnYmK1EnQfeU3NbVpcdlqE
+  Type:         HTTP-01
+  URL:          https://acme-staging-v02.api.letsencrypt.org/acme/chall/187182724/16236071664/TFkAIQ
+  Wildcard:     false
+Status:
+  Presented:   true
+  Processing:  true
+  Reason:      Waiting for HTTP-01 challenge propagation: failed to perform self check GET request 'http://ifconfig.inv.gov.ar/.well-known/acme-challenge/zuWYQWWYG3PMzNStg3N38gnYmK1EnQfeU3NbVpcdlqE': Get "http://ifconfig.inv.gov.ar/.well-known/acme-challenge/zuWYQWWYG3PMzNStg3N38gnYmK1EnQfeU3NbVpcdlqE": dial tcp: lookup ifconfig.inv.gov.ar on 10.43.0.10:53: no such host
+  State:       pending
+

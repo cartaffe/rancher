@@ -1,0 +1,21 @@
+Name:                     cm-acme-http-solver-8xkt2
+Namespace:                istio-system
+Labels:                   acme.cert-manager.io/http-domain=783746487
+                          acme.cert-manager.io/http-token=876678564
+                          acme.cert-manager.io/http01-solver=true
+Annotations:              auth.istio.io/8089: NONE
+                          field.cattle.io/publicEndpoints:
+                            [{"addresses":["172.16.0.72"],"port":30700,"protocol":"TCP","serviceName":"istio-system:cm-acme-http-solver-8xkt2","allNodes":true}]
+Selector:                 acme.cert-manager.io/http-domain=783746487,acme.cert-manager.io/http-token=876678564,acme.cert-manager.io/http01-solver=true
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.43.14.228
+IPs:                      10.43.14.228
+Port:                     http  8089/TCP
+TargetPort:               8089/TCP
+NodePort:                 http  30700/TCP
+Endpoints:                10.42.3.80:8089
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>

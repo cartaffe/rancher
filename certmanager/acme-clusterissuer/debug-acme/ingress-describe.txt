@@ -1,0 +1,18 @@
+Name:             cm-acme-http-solver-bwg2n
+Labels:           acme.cert-manager.io/http-domain=783746487
+                  acme.cert-manager.io/http-token=1189089036
+                  acme.cert-manager.io/http01-solver=true
+Namespace:        istio-system
+Address:          172.16.1.70
+Ingress Class:    <none>
+Default backend:  <default>
+Rules:
+  Host             Path  Backends
+  ----             ----  --------
+  test.inv.gov.ar  
+                   /.well-known/acme-challenge/Re1eQQbTsbuKjMS1CtfNf5wBWuCRBYbsoo-jtiUFAio   cm-acme-http-solver-7p2q4:8089 (10.42.3.79:8089)
+Annotations:       field.cattle.io/publicEndpoints:
+                     [{"addresses":["172.16.1.70"],"port":80,"protocol":"HTTP","serviceName":"istio-system:cm-acme-http-solver-7p2q4","ingressName":"istio-syst...
+                   kubernetes.io/ingress.class: istio
+                   nginx.ingress.kubernetes.io/whitelist-source-range: 0.0.0.0/0,::/0
+Events:            <none>

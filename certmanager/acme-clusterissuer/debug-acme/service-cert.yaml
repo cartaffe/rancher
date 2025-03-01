@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    auth.istio.io/8089: NONE
+    field.cattle.io/publicEndpoints: '[{"addresses":["172.16.0.72"],"port":31550,"protocol":"TCP","serviceName":"istio-system:cm-acme-http-solver-2lqjf","allNodes":true}]'
+  creationTimestamp: "2025-02-28T09:56:01Z"
+  generateName: cm-acme-http-solver-
+  labels:
+    acme.cert-manager.io/http-domain: "783746487"
+    acme.cert-manager.io/http-token: "846990935"
+    acme.cert-manager.io/http01-solver: "true"
+  name: cm-acme-http-solver-2lqjf
+  namespace: istio-system
+  ownerReferences:
+  - apiVersion: acme.cert-manager.io/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Challenge
+    name: test-cert-1-2708966330-3173574260
+    uid: 3316783b-ec41-451e-8379-456c906d66f1
+  resourceVersion: "5818597"
+  uid: 1df074d8-4b05-4d08-a6ba-b9c1bd208d01
+spec:
+  clusterIP: 10.43.27.211
+  clusterIPs:
+  - 10.43.27.211
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    nodePort: 31550
+    port: 8089
+    protocol: TCP
+    targetPort: 8089
+  selector:
+    acme.cert-manager.io/http-domain: "783746487"
+    acme.cert-manager.io/http-token: "846990935"
+    acme.cert-manager.io/http01-solver: "true"
+  sessionAffinity: None
+  type: NodePort
+

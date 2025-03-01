@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: acme-http
+  namespace: istio-system
+  labels:
+    app: nginx
+spec:
+  type: NodePort
+#  clusterIP: 10.43.27.211
+#  clusterIPs:
+#  - 10.43.27.211
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 8089
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx

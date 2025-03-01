@@ -1,0 +1,22 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-cluster-issuer
+  namespace: istio-system
+spec:
+  acme:
+    email: carlost@inv.gov.ar
+#    server: https://acme-v02.api.letsencrypt.org/directory
+#    test first
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-issuer-account-key
+    solvers:
+# https://cert-manager.io/docs/tutorials/acme/http-validation/
+    - http01:
+        ingress:
+          class: istio
+#      selector:
+#        matchLabels:
+#          k8s: "true"
+#
